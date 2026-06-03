@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPX Lat/Lon Swapper - Inverseur de Coordonnées GPX</title>
+    <meta name="description" content="Un outil en ligne simple, rapide et privé pour inverser les latitudes et longitudes de vos fichiers GPX. Tout se fait dans votre navigateur.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for beautiful icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-arrows-spin"></i>
+                </div>
+                <h1>GPX Lat/Lon <span class="gradient-text">Swapper</span></h1>
+            </div>
+            <p class="subtitle">Inversez instantanément toutes les latitudes et longitudes de vos fichiers de trace GPS. 100% sécurisé et exécuté localement dans votre navigateur.</p>
+        </header>
+
+        <!-- Main Card -->
+        <main class="glass-card">
+            <!-- Dropzone -->
+            <div id="dropzone" class="dropzone">
+                <input type="file" id="fileInput" accept=".gpx" class="file-input">
+                <div class="dropzone-content">
+                    <div class="upload-icon">
+                        <i class="fa-solid fa-file-import"></i>
+                    </div>
+                    <h3>Glissez-déposez votre fichier GPX ici</h3>
+                    <p class="dropzone-or">ou</p>
+                    <button type="button" class="btn btn-secondary btn-select">Parcourir les fichiers</button>
+                    <p class="file-limits">Format supporté : .gpx uniquement</p>
+                </div>
+            </div>
+
+            <!-- Error message -->
+            <div id="errorAlert" class="alert alert-danger hidden">
+                <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+                <span id="errorMessage">Une erreur est survenue lors du traitement du fichier.</span>
+            </div>
+
+            <!-- File details & Action container (hidden by default) -->
+            <div id="fileDetailsContainer" class="file-details-container hidden">
+                <div class="file-info-card">
+                    <div class="file-info-icon">
+                        <i class="fa-solid fa-file-code"></i>
+                    </div>
+                    <div class="file-info-text">
+                        <h4 id="fileName">trace.gpx</h4>
+                        <p id="fileSize">0 KB</p>
+                    </div>
+                    <button type="button" id="removeFileBtn" class="btn-remove" title="Supprimer le fichier">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="action-section">
+                    <button type="button" id="swapBtn" class="btn btn-primary btn-glow">
+                        <i class="fa-solid fa-right-left"></i> Inverser &amp; Télécharger
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats/Success Panel (hidden by default) -->
+            <div id="statsPanel" class="stats-panel hidden">
+                <div class="success-header">
+                    <div class="success-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3>Traitement terminé avec succès !</h3>
+                    <p>Votre fichier inversé a été généré et téléchargé automatiquement.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">Points traités</span>
+                        <span id="statPoints" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Nom de sortie</span>
+                        <span id="statName" class="stat-value-text">trace_swapped.gpx</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>Aperçu du premier point</h4>
+                    <div class="comparison-grid">
+                        <div class="coord-box">
+                            <span class="coord-title">Original</span>
+                            <div class="coord-values">
+                                <div>Lat: <strong id="origLat">-</strong></div>
+                                <div>Lon: <strong id="origLon">-</strong></div>
+                            </div>
+                        </div>
+                        <div class="coord-arrow">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                        <div class="coord-box coord-box-swapped">
+                            <span class="coord-title">Inversé</span>
+                            <div class="coord-values">
+                                <div>Lat: <strong id="swapLat">-</strong></div>
+                                <div>Lon: <strong id="swapLon">-</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reset-action">
+                    <button type="button" id="resetBtn" class="btn btn-outline">
+                        <i class="fa-solid fa-rotate-left"></i> Traiter un autre fichier
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Features Info -->
+        <section class="features-section">
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>100% Privé</h4>
+                <p>Aucune donnée n'est envoyée à un serveur. Tout le traitement se fait directement dans votre navigateur.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h4>Instantané</h4>
+                <p>Grâce à la puissance du traitement local, l'inversion prend moins d'une seconde, même pour les longs fichiers de trace.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-thumbs-up"></i></div>
+                <h4>Simple d'utilisation</h4>
+                <p>Glissez votre fichier, cliquez sur le bouton, et récupérez votre fichier GPX corrigé immédiatement.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Développé avec <i class="fa-solid fa-heart" style="color: #ff4757;"></i> pour les amateurs de cartographie GPS.</p>
+            <p class="github-link"><a href="https://github.com/tomaximum/Lat_Lon_Swapper" target="_blank"><i class="fa-brands fa-github"></i> GitHub Repository</a></p>
+        </footer>
+    </div>
+</body>
+</html>
