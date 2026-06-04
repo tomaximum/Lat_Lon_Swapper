@@ -37,18 +37,18 @@
         <!-- Main Card -->
         <main class="glass-card">
             <!-- Dropzone -->
-            <div id="dropzone" class="dropzone">
-                <input type="file" id="fileInput" accept=".gpx" class="file-input">
+            <label id="dropzone" class="dropzone" for="fileInput">
+                <input type="file" id="fileInput" accept=".gpx" class="file-input" style="display: none;">
                 <div class="dropzone-content">
                     <div class="upload-icon">
                         <i class="fa-solid fa-file-import"></i>
                     </div>
                     <h3>Glissez-déposez votre fichier GPX ici</h3>
                     <p class="dropzone-or">ou</p>
-                    <button type="button" class="btn btn-secondary btn-select">Parcourir les fichiers</button>
+                    <span class="btn btn-secondary btn-select">Parcourir les fichiers</span>
                     <p class="file-limits">Format supporté : .gpx uniquement</p>
                 </div>
-            </div>
+            </label>
 
             <!-- Error message -->
             <div id="errorAlert" class="alert alert-danger hidden">
