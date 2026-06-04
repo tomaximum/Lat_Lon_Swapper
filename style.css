@@ -648,6 +648,117 @@ footer a:hover {
     }
 }
 
+/* File List for batch processing */
+.file-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.file-list-header h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.btn-clear-all {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.btn-clear-all:hover {
+    color: var(--danger-color);
+}
+
+.file-list {
+    max-height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-right: 4px;
+}
+
+/* Custom Scrollbar for file list */
+.file-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.file-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: var(--border-radius-sm);
+}
+
+.file-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+}
+
+.file-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.file-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-md);
+    animation: slideUp 0.3s var(--transition-bezier);
+}
+
+.file-item-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.file-item-info {
+    flex-grow: 1;
+    min-width: 0; /* Enable ellipsis on flex child */
+}
+
+.file-item-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.file-item-size {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Notice for browser download permissions */
+.permission-notice {
+    display: flex;
+    gap: 12px;
+    background: rgba(79, 172, 254, 0.06);
+    border: 1px solid rgba(79, 172, 254, 0.15);
+    border-radius: var(--border-radius-md);
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    align-items: flex-start;
+}
+
+.notice-icon {
+    font-size: 1.1rem;
+    color: var(--primary-alt);
+    margin-top: 1px;
+}
+
 /* Responsive queries */
 @media (min-width: 576px) {
     .features-section {

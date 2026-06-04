@@ -43,15 +43,15 @@
             <label id="dropzone" class="dropzone" for="fileInput">
                 <div class="dropzone-content">
                     <div class="upload-icon">
-                        <i class="fa-solid fa-file-import"></i>
+                        <i class="fa-solid fa-files-medical"></i>
                     </div>
-                    <h3>Glissez-déposez votre fichier GPX ici</h3>
+                    <h3>Glissez-déposez vos fichiers GPX ici</h3>
                     <p class="dropzone-or">ou</p>
                     <span class="btn btn-secondary btn-select">Parcourir les fichiers</span>
-                    <p class="file-limits">Format supporté : .gpx uniquement</p>
+                    <p class="file-limits">Format supporté : .gpx uniquement (sélection multiple possible)</p>
                 </div>
             </label>
-            <input type="file" id="fileInput" accept=".gpx" class="file-input" style="display: none;">
+            <input type="file" id="fileInput" accept=".gpx" class="file-input" style="display: none;" multiple>
 
             <!-- Error message -->
             <div id="errorAlert" class="alert alert-danger hidden">
@@ -61,17 +61,18 @@
 
             <!-- File details & Action container (hidden by default) -->
             <div id="fileDetailsContainer" class="file-details-container hidden">
-                <div class="file-info-card">
-                    <div class="file-info-icon">
-                        <i class="fa-solid fa-file-code"></i>
-                    </div>
-                    <div class="file-info-text">
-                        <h4 id="fileName">trace.gpx</h4>
-                        <p id="fileSize">0 KB</p>
-                    </div>
-                    <button type="button" id="removeFileBtn" class="btn-remove" title="Supprimer le fichier">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                <div class="file-list-header">
+                    <h4>Fichiers sélectionnés (<span id="fileCount">0</span>)</h4>
+                    <button type="button" id="clearAllBtn" class="btn-clear-all" title="Tout enlever">Tout enlever</button>
+                </div>
+                
+                <div id="fileList" class="file-list">
+                    <!-- Dynamic file rows will be inserted here -->
+                </div>
+
+                <div class="permission-notice">
+                    <i class="fa-solid fa-circle-info notice-icon"></i>
+                    <p>Note : Votre navigateur peut vous demander l'autorisation de télécharger plusieurs fichiers simultanément. Veuillez accepter pour récupérer tous vos fichiers.</p>
                 </div>
 
                 <div class="action-section">
@@ -88,22 +89,22 @@
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
                     <h3>Traitement terminé avec succès !</h3>
-                    <p>Votre fichier inversé a été généré et téléchargé automatiquement.</p>
+                    <p>Vos fichiers inversés ont été générés et téléchargés automatiquement.</p>
                 </div>
 
                 <div class="stats-grid">
                     <div class="stat-box">
-                        <span class="stat-label">Points traités</span>
-                        <span id="statPoints" class="stat-value">0</span>
+                        <span class="stat-label">Fichiers traités</span>
+                        <span id="statFiles" class="stat-value">0</span>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">Nom de sortie</span>
-                        <span id="statName" class="stat-value-text">trace_swapped.gpx</span>
+                        <span class="stat-label">Points inversés</span>
+                        <span id="statPoints" class="stat-value">0</span>
                     </div>
                 </div>
 
                 <div class="comparison-card">
-                    <h4>Aperçu du premier point</h4>
+                    <h4>Aperçu du premier point (Premier fichier)</h4>
                     <div class="comparison-grid">
                         <div class="coord-box">
                             <span class="coord-title">Original</span>
@@ -127,7 +128,7 @@
 
                 <div class="reset-action">
                     <button type="button" id="resetBtn" class="btn btn-outline">
-                        <i class="fa-solid fa-rotate-left"></i> Traiter un autre fichier
+                        <i class="fa-solid fa-rotate-left"></i> Traiter d'autres fichiers
                     </button>
                 </div>
             </div>
