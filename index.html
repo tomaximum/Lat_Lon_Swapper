@@ -38,7 +38,6 @@
         <main class="glass-card">
             <!-- Dropzone -->
             <label id="dropzone" class="dropzone" for="fileInput">
-                <input type="file" id="fileInput" accept=".gpx" class="file-input" style="display: none;">
                 <div class="dropzone-content">
                     <div class="upload-icon">
                         <i class="fa-solid fa-file-import"></i>
@@ -49,6 +48,7 @@
                     <p class="file-limits">Format supporté : .gpx uniquement</p>
                 </div>
             </label>
+            <input type="file" id="fileInput" accept=".gpx" class="file-input" style="display: none;">
 
             <!-- Error message -->
             <div id="errorAlert" class="alert alert-danger hidden">
