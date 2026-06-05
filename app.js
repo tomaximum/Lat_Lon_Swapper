@@ -203,7 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const serializer = new XMLSerializer();
 
             filesList.forEach((item, fileIdx) => {
-                const xmlDoc = parser.parseFromString(item.content, "application/xml");
+                // Pre-process GPX content to escape unescaped ampersands (common in user files)
+                const cleanedContent = item.content.replace(/&(?!(amp|lt|gt|quot|apos|#[0-9]+|#x[0-9a-fA-F]+);)/g, '&amp;');
+                
+                const xmlDoc = parser.parseFromString(cleanedContent, "application/xml");
                 
                 // Check XML format
                 const parserErrors = xmlDoc.getElementsByTagName('parsererror');
